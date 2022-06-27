@@ -1,3 +1,6 @@
+let startButton = document.getElementById("start-button")
+let inflateButton = document.getElementById("inflate-button")
+
 let clickCount = 0
 let height = 120
 let width = 100
@@ -7,15 +10,20 @@ let popCount = 0
 
 function startGame() {
     // console.log("time to start")
+    startButton.setAttribute("disabled", true)
+    inflateButton.removeAttribute("disabled")
+
+
     setTimeout(() => {
+
+        inflateButton.setAttribute("disabled", true)
+        startButton.removeAttribute("disabled")
         console.log("it's been three seconds")
     }, 3000)
-
 }
 
 function Inflate() {
     clickCount++
-    let balloonElement = document.getElementById("Balloon")
     height += inflationRate
     width += inflationRate
     if (height >= maxSize) {
@@ -23,13 +31,21 @@ function Inflate() {
         popCount++
         height = 0
         width = 0
-        document.getElementById("pop-count").innerText = popCount
     }
+    draw()
+}
+
+
+function draw() {
+    let balloonElement = document.getElementById("Balloon")
+    let clickCountElement = document.getElementById("click-count")
+    let popCountElem = document.getElementById("pop-count")
     balloonElement.style.height = height + "px"
     balloonElement.style.width = width + "px"
 
-
-    let clickCountElement = document.getElementById("click-count")
     clickCountElement.innerText = clickCount
+
+    popCountElem.innerText = popCount
+
 }
 
