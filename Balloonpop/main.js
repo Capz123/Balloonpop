@@ -19,6 +19,13 @@ function startGame() {
         inflateButton.setAttribute("disabled", true)
         startButton.removeAttribute("disabled")
         console.log("it's been three seconds")
+
+        clickCount = 0
+        height = 120
+        width = 100
+
+        draw()
+
     }, 3000)
 }
 
