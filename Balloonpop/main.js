@@ -9,24 +9,11 @@ let maxSize = 300
 let popCount = 0
 
 function startGame() {
-    // console.log("time to start")
     startButton.setAttribute("disabled", true)
     inflateButton.removeAttribute("disabled")
+    console.log("the games has started")
 
-
-    setTimeout(() => {
-
-        inflateButton.setAttribute("disabled", true)
-        startButton.removeAttribute("disabled")
-        console.log("it's been three seconds")
-
-        clickCount = 0
-        height = 120
-        width = 100
-
-        draw()
-
-    }, 3000)
+    setTimeout(stopwGame, 3000)
 }
 
 function Inflate() {
@@ -34,7 +21,6 @@ function Inflate() {
     height += inflationRate
     width += inflationRate
     if (height >= maxSize) {
-        console.log("pop the baloon")
         popCount++
         height = 0
         width = 0
@@ -54,5 +40,17 @@ function draw() {
 
     popCountElem.innerText = popCount
 
+}
+
+function stopwGame() {
+    inflateButton.setAttribute("disabled", true)
+    startButton.removeAttribute("disabled")
+    console.log("the game is over!")
+
+    clickCount = 0
+    height = 120
+    width = 100
+
+    draw()
 }
 
