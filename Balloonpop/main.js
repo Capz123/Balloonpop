@@ -1,6 +1,11 @@
+
+//Buttons
 let startButton = document.getElementById("start-button")
 let inflateButton = document.getElementById("inflate-button")
 
+//#region Game Logic and Data
+
+// DATA
 let clickCount = 0
 let height = 120
 let width = 100
@@ -11,6 +16,7 @@ let currentPopCount = 0
 let gameLength = 5000
 let clockId = 0
 let timeRemaining = 0
+let currentPlayer = {}
 
 function startGame() {
     startButton.setAttribute("disabled", true)
@@ -58,7 +64,7 @@ function draw() {
 
     clickCountElement.innerText = clickCount
     popCountElem.innerText = currentPopCount
-    highPopCountElem.innerText = highestPopCount
+    highPopCountElem.innerText = currentPlayer.topScore.toString()
 
 }
 
@@ -71,8 +77,9 @@ function stopGame() {
     height = 120
     width = 100
 
-    if (currentPopCount > highestPopCount) {
-        highestPopCount = currentPopCount
+    if (currentPopCount > currentPlayer.topScore) {
+        currentPlayer.topScore = currentPopCount
+        savePlayers()
     }
 
     currentPopCount = 0
@@ -81,3 +88,46 @@ function stopGame() {
     draw()
 }
 
+//#endregion
+
+let players = []
+loadData()
+
+//#region PlayersData
+function setPlayer(event) {
+    event.preventDefault()
+    let form = event.target
+    let playerName = (form.playerName.value)
+
+    currentPlayer = players.find(player => player.name == playerName)
+
+    if (!currentPlayer) {
+        currentPlayer = { name: playerName, topScore: 0 }
+        players.push(currentPlayer)
+        savePlayers()
+    }
+
+
+
+    form.reset()
+    document.getElementById("game").classList.remove("hidden")
+    form.classList.add("hidden")
+    draw()
+}
+
+function changePlayer() {
+    document.getElementById("player-form").classList.remove("hidden")
+    document.getElementById("game").classList.add("hidden")
+}
+
+function savePlayers() {
+    window.localStorage.setItem("players", JSON.stringify(players))
+}
+
+function loadData() {
+    let playersData = JSON.parse(window.localStorage.getItem("players"))
+    if (playersData) {
+        players = playersData
+    }
+}
+//#endregion PlayersData
