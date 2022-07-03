@@ -1,9 +1,13 @@
 :root {
     --primary: #f393fd;
+    --primaryDarker: #bb2fca;
     --bg: rgb(217, 102, 102);
     --shadow: 2px 4px 6px black;
     --corners: 10px;
     --fontFamily: 'Permanent Marker', cursive;
+    --backLight: rgb(224, 224, 224);
+    --backDark: black;
+
 }
 
 
@@ -12,7 +16,7 @@ body {
     background-color: var(--bg);
     font-family: var(--fontFamily);
     font-size: 14pt;
-    color: rgb(87, 52, 74);
+    color: #57344a;
 }
 
 
@@ -20,15 +24,36 @@ img {
     max-width: 100%;
 }
 
+button {
+    background-color: var(--primary);
+    color: var(--backDark);
+    border-radius: var(--corners);
+    box-shadow: var(--shadow);
+    border: 1px solid #57344a;
+    text-align: center;
+    font-size: 14pt;
+    font-family: var(--fontFamily);
+    text-transform: uppercase;
+    transition: all .2s ease;
+    cursor: pointer;
+    width: 50%;
+}
+
+button:hover {
+    background-color: var(--primaryDarker);
+}
+
+
 .balloon {
     height: 120px;
     width: 100px;
     background-color: blue;
     border-radius: 50%;
+    transition: all .2s ease;
 }
 
 .card {
-    background-color: white;
+    background-color: var(--backLight);
     padding: 1em;
     box-shadow: 2px 0 8px rgba(0, 0, 0, .3);
     border-radius: var(--corners);
@@ -48,7 +73,13 @@ header {
     filter: drop-shadow(var(--shadow));
 }
 
+.d-flex {
+    display: flex;
+}
 
+.space-between {
+    justify-content: space-between;
+}
 
 .hidden {
     display: none !important;
