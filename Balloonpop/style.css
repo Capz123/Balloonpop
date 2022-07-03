@@ -1,5 +1,23 @@
+:root {
+    --primary: #f393fd;
+    --bg: rgb(217, 102, 102);
+    --shadow: 2px 4px 6px black;
+    --corners: 10px;
+    --fontFamily: 'Permanent Marker', cursive;
+}
+
+
 body {
-    background-color: wheat;
+    /*background-image: url("bgImg.jpg");*/
+    background-color: var(--bg);
+    font-family: var(--fontFamily);
+    font-size: 14pt;
+    color: rgb(87, 52, 74);
+}
+
+
+img {
+    max-width: 100%;
 }
 
 .balloon {
@@ -9,6 +27,29 @@ body {
     border-radius: 50%;
 }
 
+.card {
+    background-color: white;
+    padding: 1em;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, .3);
+    border-radius: var(--corners);
+
+}
+
+header {
+    margin: 3em 0;
+}
+
+.container {
+    width: 50%;
+    margin: auto;
+}
+
+.shadow {
+    filter: drop-shadow(var(--shadow));
+}
+
+
+
 .hidden {
-    display: none;
+    display: none !important;
 }
