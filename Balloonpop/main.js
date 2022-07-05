@@ -1,8 +1,3 @@
-
-//Buttons
-let startButton = document.getElementById("start-button")
-let inflateButton = document.getElementById("inflate-button")
-
 //#region Game Logic and Data
 
 // DATA
@@ -13,16 +8,18 @@ let inflationRate = 20
 let maxSize = 300
 let highestPopCount = 0
 let currentPopCount = 0
-let gameLength = 5000
+let gameLength = 10000
 let clockId = 0
 let timeRemaining = 0
 let currentPlayer = {}
+let currentColor = "red"
+let possibleColors = ["green", "blue", "pink", "purple", "red"]
+
 
 function startGame() {
-    startButton.setAttribute("disabled", true)
-    inflateButton.removeAttribute("disabled")
+    document.getElementById("game-controls").classList.remove("hidden")
+    document.getElementById("main-controls").classList.add("hidden")
     console.log("the games has started")
-
     startClock()
     setTimeout(stopGame, gameLength)
 }
@@ -45,12 +42,27 @@ function Inflate() {
     clickCount++
     height += inflationRate
     width += inflationRate
+    checkBalloonPop()
+    draw()
+}
+
+function checkBalloonPop() {
     if (height >= maxSize) {
+        let balloonElement = document.getElementById("Balloon")
+        balloonElement.classList.remove(currentColor)
+        getRandomColor()
+        balloonElement.classList.add(currentColor)
         currentPopCount++
         height = 0
         width = 0
     }
-    draw()
+}
+
+
+function getRandomColor() {
+    let i = Math.floor(Math.random() * possibleColors.length);
+    currentColor = possibleColors[i]
+
 }
 
 
@@ -59,6 +71,8 @@ function draw() {
     let clickCountElement = document.getElementById("click-count")
     let popCountElem = document.getElementById("pop-count")
     let highPopCountElem = document.getElementById("high-pop-count")
+    let playerNametElem = document.getElementById("player-name")
+
     balloonElement.style.height = height + "px"
     balloonElement.style.width = width + "px"
 
@@ -66,11 +80,13 @@ function draw() {
     popCountElem.innerText = currentPopCount
     highPopCountElem.innerText = currentPlayer.topScore.toString()
 
+    playerNametElem.innerText = currentPlayer.name
+
 }
 
 function stopGame() {
-    inflateButton.setAttribute("disabled", true)
-    startButton.removeAttribute("disabled")
+    document.getElementById("main-controls").classList.remove("hidden")
+    document.getElementById("game-controls").classList.add("hidden")
     console.log("the game is over!")
 
     clickCount = 0

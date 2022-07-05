@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -23,40 +25,54 @@
 
         <form class="d-flex space-between" id="player-form" onsubmit="setPlayer(event)">
             <div>
-                <label for="name">Player Name: </label>
+                <label for="name"><i class="fa-solid fa-circle-user"></i>
+                    <span>Player Name:</span>
+                </label>
                 <input type="text" name="playerName" required>
             </div>
             <button type="submit">Ok</button>
         </form>
 
+
+
+
         <section id="game" class="game hidden">
-            <div>
-                <button onclick="changePlayer()">Change Player</button>
+
+            <div class="playerCard text-light">
+                <div class="d-flex space-between">
+                    <div>
+                        <i class="fa-solid fa-circle-user iconColor"></i>
+                        <span id="player-name"></span>
+                    </div>
+                    <div>
+                        <span>Top popped: </span>
+                        <span id="high-pop-count"></span>
+                    </div>
+                </div>
             </div>
-            <div>
+            <div id="main-controls" class="d-flex space-around">
+                <button class="bg-darklighten" onclick="changePlayer()">Change Player</button>
                 <button id="start-button" onclick="startGame()">START GAME</button>
             </div>
 
-            <button id="inflate-button" onclick="Inflate()" disabled="true">Inflate<span
-                    id="click-count"></span></button>
-            <div>
-                <span>Balloon Popped: </span>
-                <span id="pop-count"></span>
+            <!-- TODO replace hidden class -->
+
+            <div id="game-controls" class="hidden">
+                <button id="inflate-button" class="d-flex" onclick="Inflate()">Inflate:
+                    <span id="click-count"></span></button>
+                <div>
+                    <span>Balloon Popped: </span>
+                    <span id="pop-count"></span>
+                </div>
+                <div>
+                    <span>Time Remaining:</span>
+                    <span id="countdown">0</span>
+                </div>
+
+                <div class="game-container d-flex">
+                    <div id="Balloon" class="Balloon"></div>
+                </div>
             </div>
-
-            <div>
-                <span>Top popped: </span>
-                <span id="high-pop-count"></span>
-            </div>
-
-            <div>
-                <span>Time Remaining:</span>
-                <span id="countdown">0</span>
-            </div>
-
-
-
-            <div id="Balloon" - class="Balloon"></div>
         </section>
     </main>
 
